@@ -1,0 +1,22 @@
+float4 color;
+struct texDistort {
+    float2 texScale(float2 uv, float2 scale) {
+        float2 texScale = (uv-(sin(scale))) * sin(scale);
+        return texScale;
+    }
+};
+texDistort txd;
+color = Texture2DSample(shape, shapeSampler, txd.texScale(uv, time));
+if (color.r==1 && color.g == 1 && color.b==1) {
+    color.r = 1;
+    color.g = 0.9;
+    color.b = 0.3;
+}
+return color;
+
+
+//Shooting Star for Shoot for the Stars game
+//Inputs:
+    shape : Texture Object
+    uv  : Texture Coordinate
+    time  :  Time
